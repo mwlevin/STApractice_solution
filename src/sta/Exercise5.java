@@ -177,6 +177,28 @@ public class Exercise5
         
         auto.flush("productions of Sioux Falls");
         
+        
+        for(int i = 0; i < nodes.length; i++)
+        {
+            if(i < zones.length)
+            {
+                auto.test(network.findNode(nodes[i].getId()) == zones[i]);
+            }
+            else
+            {
+                auto.test(network.findNode(nodes[i].getId()) == nodes[i]);
+            }
+        }
+        
+        auto.flush("Network.findNode()");
+        
+        for(int i = 0; i < links.length; i++)
+        {
+            auto.test(network.findLink(network.findNode(links[i].getStart().getId()), network.findNode(links[i].getEnd().getId())) == links[i]);
+        }
+        
+        auto.flush("Network.findLink()");
+        
         auto.end();
     }
 }

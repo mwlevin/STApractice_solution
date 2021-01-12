@@ -77,4 +77,10 @@ public class Node
     {
         outgoing.add(l);
     }
+    
+    
+    
+    
+    protected double cost;
+    protected Node predecessor;
 }

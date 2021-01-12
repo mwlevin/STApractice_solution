@@ -7,6 +7,7 @@ package sta;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -63,7 +64,20 @@ public class Network
         File netFile = new File("data/"+name+"/net.txt");
         File tripsFile = new File("data/"+name+"/trips.txt");
         
+        /* **********
+        Exercise 5(b)
+        ********** */
         
+        
+        /* **********
+        Exercise 5(c)
+        ********** */
+        
+        
+        
+        /* **********
+        Exercise 5(d)
+        ********** */
         
         int firstThruNode = 1;
         
@@ -173,5 +187,51 @@ public class Network
         
         filein.close();
         
+    }
+    
+    /* **********
+    Exercise 5(e)
+    ********** */
+    
+    public Node findNode(int id)
+    {
+        return nodes[id-1];
+    }
+    
+    public Link findLink(Node i, Node j)
+    {
+        for(Link l : i.getOutgoing())
+        {
+            if(l.getEnd() == j)
+            {
+                return l;
+            }
+        }
+        
+        return null;
+    }
+    
+    
+    
+    public void dijkstras(Node r)
+    {
+        /* **********
+        Exercise 6(b)
+        ********** */
+        
+        for(Node n : nodes)
+        {
+            n.cost = Integer.MAX_VALUE;
+            n.predecessor = null;
+        }
+        
+        r.cost = 0;
+        
+        HashSet<Node> Q = new HashSet<>();
+        Q.add(r);
+        
+        /* **********
+        Exercise 6(c)
+        ********** */
     }
 }

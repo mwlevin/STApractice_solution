@@ -129,9 +129,16 @@ public class Exercise8
             22514.0, 22875.66666666667, 23237.333333333336, 23599.0, 23960.66666666667, 24322.333333333336, 24684.0, 25045.66666666667, 25407.333333333336, 
             25769.0, 26130.66666666667, 26492.333333333336, 26854.0, 27215.66666666667, 27577.333333333336, 27939.0};
         
-        for(int i = 0; i < links.length; i++)
+        for(int i = 0; i < 76; i++)
         {
-            auto.test(Math.abs(links[i].getFlow() - newflows[i]) < 0.1);
+            if(i < links.length)
+            {
+                auto.test(Math.abs(links[i].getFlow() - newflows[i]) < 0.1);
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         auto.flush("Link.calculateNewX()");
@@ -167,9 +174,16 @@ public class Exercise8
             29252.800000000003, 29669.800000000003, 30086.800000000003, 30503.800000000003, 30920.800000000003, 31337.800000000003, 
             31754.800000000003, 32171.800000000003};
         
-        for(int i = 0; i < links.length; i++)
+        for(int i = 0; i < 76; i++)
         {
-            auto.test(Math.abs(links[i].getFlow() - newflows[i]) < 0.1);
+            if(i < links.length)
+            {
+                auto.test(Math.abs(links[i].getFlow() - newflows[i]) < 0.1);
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         auto.flush("Network.calculateNewX()");
@@ -283,9 +297,16 @@ public class Exercise8
         auto.flush("method of successive averages");
         
         
-        for(int i = 0; i < links.length; i++)
+        for(int i = 0; i < 5; i++)
         {
-            auto.test(Math.abs(links[i].getFlow() - newflows[i]) < 0.01);
+            if(i < links.length)
+            {
+                auto.test(Math.abs(links[i].getFlow() - newflows[i]) < 0.01);
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         auto.flush("link flows after 10 iterations of MSA");

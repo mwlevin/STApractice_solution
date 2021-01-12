@@ -310,4 +310,55 @@ public class Network
         
         return output;
     }
+    
+    
+    /* **********
+    Exercise 7
+    ********** */
+    public double getTSTT()
+    {
+        double output = 0;
+        
+        for(Link l : links)
+        {
+            output += l.getFlow() * l.getTravelTime();
+        }
+        
+        return output;
+    }
+    
+    
+    public double getSPTT()
+    {
+        double output = 0;
+        
+        for(Zone r : zones)
+        {
+            dijkstras(r);
+            
+            for(Zone s : zones)
+            {
+                output += r.getDemand(s) * s.cost;
+            }
+        }
+        
+        return output;
+    }
+    
+    public double getTotalTrips()
+    {
+        double output = 0;
+        
+        for(Zone r : zones)
+        {
+            output += r.getProductions();
+        }
+        
+        return output;
+    }
+
+    public double getAEC()
+    {
+        return (getTSTT() - getSPTT()) / getTotalTrips();
+    }
 }

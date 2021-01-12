@@ -15,7 +15,8 @@ public class Main
     {
         //Exercise1.main(args);
         //Exercise2.main(args);
-        Exercise3.main(args);
+        //Exercise3.main(args);
+        Exercise4.main(args);
     }
     
 }

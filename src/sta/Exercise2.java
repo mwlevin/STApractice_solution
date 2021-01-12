@@ -42,7 +42,7 @@ public class Exercise2
     }
     
     /* **********
-    Exercise 2b
+    Exercise 2(b)
     ********** */
     public static void findCongestedLinks(Link[] array)
     {

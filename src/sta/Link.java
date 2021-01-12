@@ -30,6 +30,9 @@ public class Link
         this.C = C;
         this.alpha = alpha;
         this.beta = beta;
+        
+        // remove this
+        start.addOutgoingLink(this);
     }
     
     // updates the flow on this link
@@ -55,7 +58,7 @@ public class Link
     
     
     /* **********
-    Exercise 2a
+    Exercise 2(a)
     ********** */
     public double getCapacity()
     {
@@ -82,7 +85,7 @@ public class Link
     
     
     /* **********
-    Exercise 3a
+    Exercise 3(a)
     ********** */
     public Node getStart()
     {
@@ -96,10 +99,10 @@ public class Link
     
     
     /* **********
-    Exercise 3c
+    Exercise 3(c)
     ********** */
     public String toString()
     {
-        return "";
+        return "("+start.getId()+", "+end.getId()+")";
     }
 }

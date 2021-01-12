@@ -120,10 +120,10 @@ public class Exercise3
         
         auto.flush("Link.toString()");
         
-        auto.test(n1.getOutgoing().toString().equals("[(1, 2), (1, 3)]") || n1.getOutgoing().toString().equals("[(1, 3), (1, 2)]"));
-        auto.test(n2.getOutgoing().toString().equals("[(2, 3), (2, 4)]") || n2.getOutgoing().toString().equals("[(2, 4), (2, 3)]"));
-        auto.test(n3.getOutgoing().toString().equals("[(3, 4)]"));
-        auto.test(n4.getOutgoing().toString().equals("[]"));
+        auto.test((""+n1.getOutgoing()).equals("[(1, 2), (1, 3)]") || (""+n1.getOutgoing()).toString().equals("[(1, 3), (1, 2)]"));
+        auto.test((""+n2.getOutgoing()).toString().equals("[(2, 3), (2, 4)]") || (""+n2.getOutgoing()).toString().equals("[(2, 4), (2, 3)]"));
+        auto.test((""+n3.getOutgoing()).toString().equals("[(3, 4)]"));
+        auto.test((""+n4.getOutgoing()).toString().equals("[]"));
         
         auto.flush("Node.getOutgoing()");
         

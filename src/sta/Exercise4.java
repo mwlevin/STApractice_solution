@@ -23,9 +23,10 @@ public class Exercise4
         System.out.println(n1.getId());
         System.out.println(n2.getId());
         
-        n1.addDemand(n1, 25);
+        n1.addDemand(n2, 15);
         n1.addDemand(n3, 20);
-        n2.addDemand(n1, 39);
+        n1.addDemand(n3, 9);
+        n2.addDemand(n3, 19);
         n2.addDemand(n4, 23);
         
         System.out.println(n1.getDemand(n2));
@@ -34,6 +35,9 @@ public class Exercise4
         System.out.println(n2.getDemand(n1));
         System.out.println(n2.getDemand(n3));
         System.out.println(n2.getDemand(n4));
+        
+        System.out.println(n1.getProductions());
+        System.out.println(n2.getProductions());
         
         n1.setThruNode(false);
         
@@ -60,13 +64,14 @@ public class Exercise4
         
         auto.flush("Zone constructor");
         
-        n1.addDemand(n1, 25);
+        n1.addDemand(n2, 15);
         n1.addDemand(n3, 20);
-        n2.addDemand(n1, 39);
+        n1.addDemand(n3, 9);
+        n2.addDemand(n3, 19);
         n2.addDemand(n4, 23);
         
         auto.test(n1.getDemand(n2) == 15);
-        auto.test(n1.getDemand(n3) == 20);
+        auto.test(n1.getDemand(n3) == 29);
         auto.test(n1.getDemand(n4) == 0);
         auto.test(n2.getDemand(n1) == 0);
         auto.test(n2.getDemand(n3) == 19);
@@ -75,7 +80,7 @@ public class Exercise4
         auto.flush("Zone.addDemand() and Zone.getDemand()");
         
         
-        auto.test(n1.getProductions() == 35);
+        auto.test(n1.getProductions() == 44);
         auto.test(n2.getProductions() == 42);
         
         auto.flush("getProductions()");

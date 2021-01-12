@@ -31,8 +31,10 @@ public class Link
         this.alpha = alpha;
         this.beta = beta;
         
-        // remove this
-        start.addOutgoingLink(this);
+        if(start != null)
+        {
+            start.addOutgoingLink(this);
+        }
     }
     
     // updates the flow on this link

@@ -36,7 +36,7 @@ public class Autograde
     
     public void flush(String label)
     {
-        System.out.println("Testing "+label+": " + Math.round(points*100.0/total)+"%");
+        System.out.println("Testing "+label+": " + points +" / "+ total +" ("+Math.round(points*100.0/total)+"%)");
         
         overall_points += points;
         overall_total += total;
@@ -47,7 +47,7 @@ public class Autograde
     
     public void end()
     {
-        System.out.println("\nTotal: "+Math.round(overall_points* 100.0 / overall_total )+"%");
+        System.out.println("\nTotal: "+ overall_points+" / "+overall_total+" ("+Math.round(overall_points* 100.0 / overall_total )+"%)");
         
         printAutogradeFooter();
     }

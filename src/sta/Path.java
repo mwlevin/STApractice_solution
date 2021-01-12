@@ -38,6 +38,19 @@ public class Path extends ArrayList<Link>
         return true;
     }
     
+    /* **********
+    Exercise 6(a)
+    ********** */
+    public Node getSource()
+    {
+        return get(0).getStart();
+    }
+    
+    public Node getDest()
+    {
+        return get(size()-1).getEnd();
+    }
+    
     public void addFlow(double h)
     {
         

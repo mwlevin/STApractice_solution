@@ -24,7 +24,8 @@ public class Network
     {
         try
         {
-            readNetwork(name);
+            readNetwork(new File("data/"+name+"/net.txt"));
+            readTrips(new File("data/"+name+"/trips.txt"));
         }
         catch(IOException ex)
         {
@@ -59,11 +60,8 @@ public class Network
     
     
     
-    public void readNetwork(String name) throws IOException
+    public void readNetwork(File netFile) throws IOException
     {
-        File netFile = new File("data/"+name+"/net.txt");
-        File tripsFile = new File("data/"+name+"/trips.txt");
-        
         /* **********
         Exercise 5(b)
         ********** */
@@ -120,6 +118,11 @@ public class Network
             if(i < zones.length)
             {
                 nodes[i] = zones[i];
+                
+                if(i+1 < firstThruNode)
+                {
+                    zones[i].setThruNode(false);
+                }
             }
             else
             {
@@ -156,7 +159,21 @@ public class Network
         
         
         
-        filein = new Scanner(tripsFile);
+    }
+    
+    public void readTrips(File tripsFile) throws IOException
+    {
+
+        
+        
+        /* **********
+        Exercise 5(d)
+        ********** */
+        
+        
+        
+        Scanner filein = new Scanner(tripsFile);
+        String line;
         
         do
         {
@@ -195,11 +212,21 @@ public class Network
     
     public Node findNode(int id)
     {
+        if(id <= 0 || id > nodes.length)
+        {
+            return null;
+            
+        }
         return nodes[id-1];
     }
     
     public Link findLink(Node i, Node j)
     {
+        if(i == null)
+        {
+            return null;
+        }
+        
         for(Link l : i.getOutgoing())
         {
             if(l.getEnd() == j)
@@ -233,5 +260,54 @@ public class Network
         /* **********
         Exercise 6(c)
         ********** */
+        
+        while(!Q.isEmpty())
+        {
+            Node u = null;
+            double mincost = Double.MAX_VALUE;
+            
+            for(Node n : Q)
+            {
+                if(n.cost < mincost)
+                {
+                    mincost = n.cost;
+                    u = n;
+                }
+            }
+            
+            Q.remove(u);
+            
+            for(Link l : u.getOutgoing())
+            {
+                Node v = l.getEnd();
+                
+                if(u.cost + l.getTravelTime() < v.cost)
+                {
+                    v.cost = u.cost + l.getTravelTime();
+                    v.predecessor = u;
+                    Q.add(v);
+                }
+            }
+        }
+    }
+    
+    
+    /* **********
+    Exercise 6(d)
+    ********** */
+    
+    public Path trace(Node r, Node s)
+    {
+        Node curr = s;
+        
+        Path output = new Path();
+        
+        while(curr != r)
+        {
+            output.add(0, findLink(curr.predecessor, curr));
+            curr = curr.predecessor;
+        }
+        
+        return output;
     }
 }

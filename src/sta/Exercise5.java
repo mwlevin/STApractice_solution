@@ -44,6 +44,35 @@ public class Exercise5
             }
         }
         
+        
+        for(int i = 0; i < nodes.length; i++)
+        {
+            if(i < zones.length)
+            {
+                System.out.println(network.findNode(nodes[i].getId()) == zones[i]);
+            }
+            else
+            {
+                System.out.println(network.findNode(nodes[i].getId()) == nodes[i]);
+            }
+        }
+        
+        System.out.println(network.findNode(100));
+        System.out.println(network.findNode(-1));
+
+        
+        for(int i = 0; i < links.length; i++)
+        {
+            System.out.println(network.findLink(network.findNode(links[i].getStart().getId()), network.findNode(links[i].getEnd().getId())) == links[i]);
+        }
+        
+        System.out.println(network.findLink(null, nodes[0]));
+        
+        
+        
+        
+        
+        
         autograde();
     }
     
@@ -75,7 +104,20 @@ public class Exercise5
             auto.test(nodes[i] != null);
         }
         
+  
+        
         auto.flush("construction of zones and nodes");
+        
+        
+        for(int i = 0; i < nodes.length; i++)
+        {
+            auto.test(nodes[i].isThruNode() == (i+1 >= 2));
+        }
+        
+        
+        auto.flush("isThruNode() parameter");
+        
+        
         
         for(int i = 0; i< nodes.length; i++)
         {
@@ -196,6 +238,8 @@ public class Exercise5
         {
             auto.test(network.findLink(network.findNode(links[i].getStart().getId()), network.findNode(links[i].getEnd().getId())) == links[i]);
         }
+        
+        auto.test(network.findLink(null, nodes[0]) == null);
         
         auto.flush("Network.findLink()");
         

@@ -273,7 +273,7 @@ public class Exercise8
 
             filein.close();
             
-            //tempFile.delete();
+            tempFile.delete();
         }
         catch(IOException ex)
         {

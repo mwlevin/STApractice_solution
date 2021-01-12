@@ -11,19 +11,19 @@ import java.util.HashMap;
  *
  * @author micha
  */
-public class Origin extends Node
+public class Zone extends Node
 {
     private HashMap<Node, Double> demand;
     
     /* **********
     Exercise 4(a)
     ********** */
-    public Origin(int id)
+    public Zone(int id)
     {
         // remove this
         super(id);
         demand = new HashMap<>();
-        
+        thruNode = true;
     }
     
     
@@ -53,5 +53,39 @@ public class Origin extends Node
         {
             return 0;
         }
+    }
+    
+    
+    /* **********
+    Exercise 4(c)
+    ********** */
+    public double getProductions()
+    {
+        double total = 0;
+        
+        for(Node s : demand.keySet())
+        {
+            total += demand.get(s);
+        }
+        
+        return total;
+    }
+    
+    
+    
+    /* **********
+    Exercise 4(d)
+    ********** */
+    
+    private boolean thruNode;
+    
+    public boolean isThruNode()
+    {
+        return thruNode;
+    }
+    
+    public void setThruNode(boolean thru)
+    {
+        thruNode = thru;
     }
 }

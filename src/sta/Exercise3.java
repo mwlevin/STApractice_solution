@@ -85,45 +85,45 @@ public class Exercise3
         
         for(int i = 0; i < array.length; i++)
         {
-            auto.test(array[i].getStart() == starts[i], 1);
+            auto.test(array[i].getStart() == starts[i]);
         }
         
         auto.flush("Node.getStart()");
         
         for(int i = 0; i < array.length; i++)
         {
-            auto.test(array[i].getEnd() == ends[i], 1);
+            auto.test(array[i].getEnd() == ends[i]);
         }
         
         auto.flush("Node.getEnd()");
         
         
-        auto.test(n1.getId()==1, 1);
-        auto.test(n2.getId()==2, 1);
-        auto.test(n3.getId()==3, 1);
-        auto.test(n4.getId()==4, 1);
+        auto.test(n1.getId()==1);
+        auto.test(n2.getId()==2);
+        auto.test(n3.getId()==3);
+        auto.test(n4.getId()==4);
         
         auto.flush("Node.getId()");
         
-        auto.test(n1.toString().equals("1"), 1);
-        auto.test(n2.toString().equals("2"), 1);
-        auto.test(n3.toString().equals("3"), 1);
-        auto.test(n4.toString().equals("4"), 1);
+        auto.test(n1.toString().equals("1"));
+        auto.test(n2.toString().equals("2"));
+        auto.test(n3.toString().equals("3"));
+        auto.test(n4.toString().equals("4"));
         
         auto.flush("Node.toString()");
         
-        auto.test(array[0].toString().equals("(1, 2)"), 1);
-        auto.test(array[1].toString().equals("(1, 3)"), 1);
-        auto.test(array[2].toString().equals("(2, 4)"), 1);
-        auto.test(array[3].toString().equals("(3, 4)"), 1);
-        auto.test(array[4].toString().equals("(2, 3)"), 1);
+        auto.test(array[0].toString().equals("(1, 2)"));
+        auto.test(array[1].toString().equals("(1, 3)"));
+        auto.test(array[2].toString().equals("(2, 4)"));
+        auto.test(array[3].toString().equals("(3, 4)"));
+        auto.test(array[4].toString().equals("(2, 3)"));
         
         auto.flush("Link.toString()");
         
-        auto.test(n1.getOutgoing().toString().equals("[(1, 2), (1, 3)]") || n1.getOutgoing().toString().equals("[(1, 3), (1, 2)]"), 1);
-        auto.test(n2.getOutgoing().toString().equals("[(2, 3), (2, 4)]") || n2.getOutgoing().toString().equals("[(2, 4), (2, 3)]"), 1);
-        auto.test(n3.getOutgoing().toString().equals("[(3, 4)]"), 1);
-        auto.test(n4.getOutgoing().toString().equals("[]"), 1);
+        auto.test(n1.getOutgoing().toString().equals("[(1, 2), (1, 3)]") || n1.getOutgoing().toString().equals("[(1, 3), (1, 2)]"));
+        auto.test(n2.getOutgoing().toString().equals("[(2, 3), (2, 4)]") || n2.getOutgoing().toString().equals("[(2, 4), (2, 3)]"));
+        auto.test(n3.getOutgoing().toString().equals("[(3, 4)]"));
+        auto.test(n4.getOutgoing().toString().equals("[]"));
         
         auto.flush("Node.getOutgoing()");
         

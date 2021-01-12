@@ -11,8 +11,8 @@ package sta;
  */
 public class Autograde 
 {
-    private double points, total;
-    private double overall_points, overall_total;
+    private int points, total;
+    private int overall_points, overall_total;
     
     public Autograde()
     {
@@ -24,19 +24,19 @@ public class Autograde
         overall_total = 0;
     }
     
-    public void test(boolean pass, int value)
+    public void test(boolean pass)
     {
-        total += value;
+        total ++;
         
         if(pass)
         {
-            points += value;
+            points ++;
         }
     }
     
     public void flush(String label)
     {
-        System.out.println("Testing "+label+": " + Math.round(points/total*100.0)+"%");
+        System.out.println("Testing "+label+": " + Math.round(points*100.0/total)+"%");
         
         overall_points += points;
         overall_total += total;
@@ -47,7 +47,7 @@ public class Autograde
     
     public void end()
     {
-        System.out.println("\nTotal: "+Math.round(overall_points / overall_total * 100.0)+"%");
+        System.out.println("\nTotal: "+Math.round(overall_points* 100.0 / overall_total )+"%");
         
         printAutogradeFooter();
     }

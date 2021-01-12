@@ -92,7 +92,7 @@ public class Exercise2
         
         for(int i = 0; i < array.length; i++)
         {
-            auto.test(array[i].getCapacity() == capacities[i], 1);
+            auto.test(array[i].getCapacity() == capacities[i]);
         }
         
         auto.flush("Link.getCapacity()");
@@ -101,7 +101,7 @@ public class Exercise2
         
         for(int i = 0; i < array.length; i++)
         {
-            auto.test(array[i].getFlow() == flows[i], 1);
+            auto.test(array[i].getFlow() == flows[i]);
         }
         
         auto.flush("Link.getFlow()");
@@ -161,10 +161,10 @@ public class Exercise2
                     answer4 = filein.next();
                 }
                 
-                auto.test(answer1.equalsIgnoreCase("link"), 1);
-                auto.test(answer2 == i+1, 1);
-                auto.test(Math.abs(answer3 - answers[i]) < 0.01, 1);
-                auto.test(answer4.equalsIgnoreCase(answers2[i]), 1);
+                auto.test(answer1.equalsIgnoreCase("link"));
+                auto.test(answer2 == i+1);
+                auto.test(Math.abs(answer3 - answers[i]) < 0.01);
+                auto.test(answer4.equalsIgnoreCase(answers2[i]));
             }
 
             filein.close();

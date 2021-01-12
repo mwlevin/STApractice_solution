@@ -45,18 +45,18 @@ public class Exercise1
         
         
         link1.setFlow(1230.2);
-        auto.test(Math.abs(link1.getTravelTime() - 10.077538130554997) < 0.01, 1);
+        auto.test(Math.abs(link1.getTravelTime() - 10.077538130554997) < 0.01);
         
         link2.setFlow(570);
         
-        auto.test(Math.abs(link2.getTravelTime() - 12.378) < 0.01, 1);
+        auto.test(Math.abs(link2.getTravelTime() - 12.378) < 0.01);
         
         link1.setFlow(0);
         link2.setFlow(2512);
         
 
-        auto.test(Math.abs(link1.getTravelTime() - 10.0) < 0.01, 1);
-        auto.test(Math.abs(link2.getTravelTime() - 19.341441772853184) < 0.01, 1);
+        auto.test(Math.abs(link1.getTravelTime() - 10.0) < 0.01);
+        auto.test(Math.abs(link2.getTravelTime() - 19.341441772853184) < 0.01);
         
         auto.flush("Link.getTravelTime()");
         auto.end();

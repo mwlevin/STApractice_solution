@@ -14,8 +14,8 @@ public class Exercise4
     public static void main(String[] args)
     {
         
-        Origin n1 = new Origin(1);
-        Origin n2 = new Origin(2);
+        Zone n1 = new Zone(1);
+        Zone n2 = new Zone(2);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         
@@ -23,9 +23,9 @@ public class Exercise4
         System.out.println(n1.getId());
         System.out.println(n2.getId());
         
-        n1.addDemand(n2, 15);
+        n1.addDemand(n1, 25);
         n1.addDemand(n3, 20);
-        n2.addDemand(n3, 19);
+        n2.addDemand(n1, 39);
         n2.addDemand(n4, 23);
         
         System.out.println(n1.getDemand(n2));
@@ -34,6 +34,11 @@ public class Exercise4
         System.out.println(n2.getDemand(n1));
         System.out.println(n2.getDemand(n3));
         System.out.println(n2.getDemand(n4));
+        
+        n1.setThruNode(false);
+        
+        System.out.println(n1.isThruNode());
+        System.out.println(n2.isThruNode());
         
         
         autograde();
@@ -45,29 +50,42 @@ public class Exercise4
         Autograde auto = new Autograde();
         
         
-        Origin n1 = new Origin(1);
-        Origin n2 = new Origin(2);
+        Zone n1 = new Zone(1);
+        Zone n2 = new Zone(2);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         
-        auto.test(n1.getId() == 1, 1);
-        auto.test(n2.getId() == 2, 1);
+        auto.test(n1.getId() == 1);
+        auto.test(n2.getId() == 2);
         
-        auto.flush("Origin constructor");
+        auto.flush("Zone constructor");
         
-        n1.addDemand(n2, 15);
+        n1.addDemand(n1, 25);
         n1.addDemand(n3, 20);
-        n2.addDemand(n3, 19);
+        n2.addDemand(n1, 39);
         n2.addDemand(n4, 23);
         
-        auto.test(n1.getDemand(n2) == 15, 1);
-        auto.test(n1.getDemand(n3) == 20, 1);
-        auto.test(n1.getDemand(n4) == 0, 1);
-        auto.test(n2.getDemand(n1) == 0, 1);
-        auto.test(n2.getDemand(n3) == 19, 1);
-        auto.test(n2.getDemand(n4) == 23, 1);
+        auto.test(n1.getDemand(n2) == 15);
+        auto.test(n1.getDemand(n3) == 20);
+        auto.test(n1.getDemand(n4) == 0);
+        auto.test(n2.getDemand(n1) == 0);
+        auto.test(n2.getDemand(n3) == 19);
+        auto.test(n2.getDemand(n4) == 23);
         
-        auto.flush("Origin.addDemand() and Origin.getDemand()");
+        auto.flush("Zone.addDemand() and Zone.getDemand()");
+        
+        
+        auto.test(n1.getProductions() == 35);
+        auto.test(n2.getProductions() == 42);
+        
+        auto.flush("getProductions()");
+        
+        n1.setThruNode(false);
+        
+        auto.test(n1.isThruNode() == false);
+        auto.test(n2.isThruNode() == true);
+        
+        auto.flush("Zone.isThruNode()");
         
         auto.end();
     }

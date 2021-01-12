@@ -22,6 +22,8 @@ public class Node
     
     private int id;
     
+    private boolean thruNode;
+    
     
     public Node(int id)
     {
@@ -38,6 +40,10 @@ public class Node
     
     
     
+    public boolean isThruNode()
+    {
+        return true;
+    }
     
     
     public int hashCode()

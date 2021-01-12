@@ -13,6 +13,7 @@ public class Exercise6
 {
     public static void main(String[] args)
     {
+        
         Network network = new Network("SiouxFalls");
         
         
@@ -27,20 +28,26 @@ public class Exercise6
         }
         
         Path path = new Path();
-        path.add(links[0]);
-        path.add(links[3]);
-        path.add(links[14]);
-        path.add(links[12]);
-        
+        if(links.length > 13)
+        {
+            path.add(links[0]);
+            path.add(links[3]);
+            path.add(links[14]);
+            path.add(links[12]);
+        }
+
         System.out.println(path.isConnected());
         System.out.println(path.getTravelTime());        
         
         
         Path path2 = new Path();
         
-        for(int i = 0; i < 4; i++)
+        if(links.length > 4)
         {
-            path2.add(links[i]);
+            for(int i = 0; i < 4; i++)
+            {
+                path2.add(links[i]);
+            }
         }
         
         System.out.println(path2.isConnected());
@@ -49,20 +56,22 @@ public class Exercise6
         System.out.println(path.getSource()+" "+path.getDest());
         System.out.println(path2.getSource()+" "+path2.getDest());
         
-        
-        network.dijkstras(nodes[0]);
-        
-        for(int i = 0; i < nodes.length; i++)
+        if(nodes.length > 0)
         {
-            System.out.println(nodes[i]+" "+nodes[i].cost+" "+nodes[i].predecessor);
-            System.out.println(network.trace(nodes[0], nodes[i]));
-        }
-        
-        network.dijkstras(nodes[0]);
-        
-        for(int i = 0; i < nodes.length; i++)
-        {
-            System.out.println("Path from "+nodes[0]+" to "+nodes[i]+": "+network.trace(nodes[0], nodes[i]));
+            network.dijkstras(nodes[0]);
+
+            for(int i = 0; i < nodes.length; i++)
+            {
+                System.out.println(nodes[i]+" "+nodes[i].cost+" "+nodes[i].predecessor);
+                System.out.println(network.trace(nodes[0], nodes[i]));
+            }
+
+            network.dijkstras(nodes[0]);
+
+            for(int i = 0; i < nodes.length; i++)
+            {
+                System.out.println("Path from "+nodes[0]+" to "+nodes[i]+": "+network.trace(nodes[0], nodes[i]));
+            }
         }
         
 
@@ -89,10 +98,14 @@ public class Exercise6
         }
         
         Path path = new Path();
-        path.add(links[0]);
-        path.add(links[3]);
-        path.add(links[14]);
-        path.add(links[12]);
+        
+        if(links.length > 12)
+        {
+            path.add(links[0]);
+            path.add(links[3]);
+            path.add(links[14]);
+            path.add(links[12]);
+        }
         
         auto.test(path.isConnected() == true);
                 
@@ -100,9 +113,12 @@ public class Exercise6
         
         Path path2 = new Path();
         
-        for(int i = 0; i < 4; i++)
+        if(links.length > 4)
         {
-            path2.add(links[i]);
+            for(int i = 0; i < 4; i++)
+            {
+                path2.add(links[i]);
+            }
         }
         
         auto.test(path2.isConnected() == false);
@@ -110,10 +126,28 @@ public class Exercise6
         auto.flush("Link.isConnected()");
         
 
-        auto.test(path.getSource().getId() == 1);
-        auto.test(path2.getSource().getId() == 1);
-        auto.test(path.getDest().getId() == 9);
-        auto.test(path2.getDest().getId() == 6);
+        if(path.size() > 0)
+        {
+            auto.test(path.getSource().getId() == 1);
+        }
+        if(path2.size() > 0)
+        {
+            auto.test(path2.getSource().getId() == 1);
+        }
+        
+        auto.flush("Path.getSource()");
+        
+        if(path.size() > 0)
+        {
+            auto.test(path.getDest().getId() == 9);
+        }
+        
+        if(path2.size() > 0)
+        {
+            auto.test(path2.getDest().getId() == 6);
+        }
+        
+        auto.flush("Path.getDest()");
         
         
         
@@ -123,56 +157,87 @@ public class Exercise6
         
         auto.flush("Link.getTravelTime()");
         
-        network.dijkstras(nodes[0]);
-        
-        auto.test(nodes[0].predecessor == null);
-        
-        for(int i = 1; i < nodes.length; i++)
+        if(nodes.length > 0)
         {
-            if(i == 0)
+            network.dijkstras(nodes[0]);
+        
+            auto.test(nodes[0].predecessor == null);
+        }
+        
+        for(int i = 1; i < 24; i++)
+        {
+            if(i < nodes.length)
             {
-                auto.test(nodes[i].cost == 0);
+                if(i == 0)
+                {
+                    auto.test(nodes[i].cost == 0);
+                }
+                else
+                {
+                    auto.test(nodes[i].cost > 0);
+                }
             }
             else
             {
-                auto.test(nodes[i].cost > 0);
+                auto.test(false);
             }
         }
 
-        
-        network.dijkstras(nodes[10]);
-        
-        auto.test(nodes[10].predecessor == null);
-        
-        for(int i = 1; i < nodes.length; i++)
+        if(nodes.length > 10)
         {
-            if(i == 10)
+            network.dijkstras(nodes[10]);
+
+            auto.test(nodes[10].predecessor == null);
+        }
+        
+        for(int i = 1; i < 24; i++)
+        {
+            if(i < nodes.length)
             {
-                auto.test(nodes[i].cost == 0);
+                if(i == 10)
+                {
+                    auto.test(nodes[i].cost == 0);
+                }
+                else
+                {
+                    auto.test(nodes[i].cost > 0);
+                }
             }
             else
             {
-                auto.test(nodes[i].cost > 0);
+                auto.test(false);
             }
         }
         
         auto.flush("Dijkstra's initialization");
         
         
-        
-        network.dijkstras(nodes[0]);
+        if(nodes.length > 0)
+        {
+            network.dijkstras(nodes[0]);
+        }
         
         double[] costs = new double[]{0.0, 6.000002173366477, 4.000010704018527, 8.001086579821319, 10.002993278827729, 11.05012818657351, 20.254815898571675, 
             15.796757080158615, 15.185238922340416, 18.530190870067695, 15.441219860476464, 8.000533540987554, 11.131431652920096, 119.42992460379457, 
             25.730656873570418, 27.11253935123187, 138.53485409204677, 22.26303321972979, 31.539301160373306, 27.58642669899411, 650.1485820323414, 44.95245518013293, 
             342.23125672182744, 158.61247346764176};
         
-        for(int i = 0; i < nodes.length; i++)
+        for(int i = 0; i < 24; i++)
         {
-            auto.test(Math.abs(costs[i] - nodes[i].cost) < 0.01);
+            if(i < nodes.length)
+            {
+                auto.test(Math.abs(costs[i] - nodes[i].cost) < 0.01);
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
-        network.dijkstras(nodes[10]);
+        if(nodes.length > 10)
+        {
+            network.dijkstras(nodes[10]);
+        }
         
         costs = new double[]{30.561574457187128, 35.335356588859646, 26.561407873336385, 22.558483478099397, 20.554540759663677, 26.36459203655937, 
             35.569279748557534, 31.111220930144476, 13.988425749509492, 10.587359148869036, 0.0, 30.56193071030541, 33.69282882223795, 103.98870474331811, 
@@ -180,32 +245,58 @@ public class Exercise6
             37.00962345893427, 326.790036861351, 181.1738706369596};
         
         
-        for(int i = 0; i < nodes.length; i++)
+        for(int i = 0; i < 24; i++)
         {
-            auto.test(Math.abs(costs[i] - nodes[i].cost) < 0.01);
+            if(i < nodes.length)
+            {
+                auto.test(Math.abs(costs[i] - nodes[i].cost) < 0.01);
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         auto.flush("Dijkstra's cost labels");
         
         
         
-        
-        network.dijkstras(nodes[0]);
+        if(nodes.length > 0)
+        {
+            network.dijkstras(nodes[0]);
+        }
         
         int[] preds = new int[]{-1, 1, 1, 3, 4, 2, 8, 6, 5, 9, 4, 3, 12, 11, 10, 18, 10, 7, 15, 18, 22, 15, 14, 13};
         
-        for(int i = 0; i < nodes.length; i++)
+        for(int i = 0; i < 24; i++)
         {
-           auto.test(nodes[i].predecessor == network.findNode(preds[i]));
+            if(i < nodes.length)
+            {
+                auto.test(nodes[i].predecessor == network.findNode(preds[i]));
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         preds = new int[]{3, 6, 4, 5, 9, 5, 8, 6, 10, 11, -1, 3, 12, 11, 10, 18, 10, 7, 15, 18, 22, 15, 14, 13};
         
-        network.dijkstras(nodes[10]);
-        
-        for(int i = 0; i < nodes.length; i++)
+        if(nodes.length > 10)
         {
-           auto.test(nodes[i].predecessor == network.findNode(preds[i]));
+            network.dijkstras(nodes[10]);
+        }
+        
+        for(int i = 0; i < 24; i++)
+        {
+            if(i < nodes.length)
+            {
+                auto.test(nodes[i].predecessor == network.findNode(preds[i]));
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         auto.flush("Dijkstra's predecessor labels");
@@ -221,11 +312,21 @@ public class Exercise6
             "[(1, 3), (3, 4), (4, 11), (11, 14), (14, 23)]", "[(1, 3), (3, 12), (12, 13), (13, 24)]"};
         
 
-        network.dijkstras(nodes[0]);
-       
-        for(int i = 0; i < nodes.length; i++)
+        if(nodes.length > 0)
         {
-            auto.test(network.trace(nodes[0], nodes[i]).toString().equals(traces[i]));
+            network.dijkstras(nodes[0]);
+        }
+       
+        for(int i = 0; i < 24; i++)
+        {
+            if(i < nodes.length)
+            {
+                auto.test(network.trace(nodes[0], nodes[i]).toString().equals(traces[i]));
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         traces = new String[]{"[(11, 10), (10, 9), (9, 5), (5, 4), (4, 3), (3, 1)]", "[(11, 10), (10, 9), (9, 5), (5, 6), (6, 2)]", 
@@ -237,11 +338,22 @@ public class Exercise6
             "[(11, 10), (10, 15), (15, 22), (22, 21)]", "[(11, 10), (10, 15), (15, 22)]", "[(11, 14), (14, 23)]", 
             "[(11, 10), (10, 9), (9, 5), (5, 4), (4, 3), (3, 12), (12, 13), (13, 24)]"};
         
-        network.dijkstras(nodes[10]);
         
-        for(int i = 0; i < nodes.length; i++)
+        if(nodes.length > 10)
         {
-            auto.test(network.trace(nodes[10], nodes[i]).toString().equals(traces[i]));
+            network.dijkstras(nodes[10]);
+        }
+        
+        for(int i = 0; i < 24; i++)
+        {
+            if(i < nodes.length)
+            {
+                auto.test(network.trace(nodes[10], nodes[i]).toString().equals(traces[i]));
+            }
+            else
+            {
+                auto.test(false);
+            }
         }
         
         auto.flush("trace() after Dijkstra's");
@@ -253,11 +365,18 @@ public class Exercise6
             119.42992460379457, 25.730656873570418, 27.11253935123187, 138.53485409204677, 22.26303321972979, 31.539301160373306, 27.58642669899411, 
             650.1485820323414, 44.95245518013293, 342.23125672182744, 158.61247346764176};
         
-        network.dijkstras(nodes[0]);
-       
-        for(int i = 0; i < nodes.length; i++)
+        if(nodes.length > 0)
         {
-            auto.test(Math.abs(network.trace(nodes[0], nodes[i]).getTravelTime() - costs[i]) < 0.01);
+            network.dijkstras(nodes[0]);
+        }
+       
+        
+        for(int i = 0; i < 24; i++)
+        {
+            if(i < nodes.length)
+            {
+                auto.test(Math.abs(network.trace(nodes[0], nodes[i]).getTravelTime() - costs[i]) < 0.01);
+            }
         }
         
         
@@ -266,11 +385,18 @@ public class Exercise6
             103.98870474331811, 17.787825152371756, 42.42700320121773, 130.5920223708481, 37.57749706971565, 23.59646943917464, 42.900890548979966, 
             642.2057503111428, 37.00962345893427, 326.790036861351, 181.1738706369596};
         
-        network.dijkstras(nodes[10]);
-        
-        for(int i = 0; i < nodes.length; i++)
+        if(nodes.length > 10)
         {
-            auto.test(Math.abs(network.trace(nodes[10], nodes[i]).getTravelTime() - costs[i]) < 0.01);
+            network.dijkstras(nodes[10]);
+        }
+        
+        
+        for(int i = 0; i < 24; i++)
+        {
+            if(i < nodes.length)
+            {
+                auto.test(Math.abs(network.trace(nodes[10], nodes[i]).getTravelTime() - costs[i]) < 0.01);
+            }
         }
         
         auto.flush("costs of paths found by trace()");

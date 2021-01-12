@@ -51,8 +51,14 @@ public class Path extends ArrayList<Link>
         return get(size()-1).getEnd();
     }
     
-    public void addFlow(double h)
+    /* **********
+    Exercise 8(a)
+    ********** */
+    public void addHstar(double h)
     {
-        
+        for(Link l : this)
+        {
+            l.addXstar(h);
+        }
     }
 }

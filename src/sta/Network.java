@@ -285,7 +285,11 @@ public class Network
                 {
                     v.cost = u.cost + l.getTravelTime();
                     v.predecessor = u;
-                    Q.add(v);
+                    
+                    if(v.isThruNode())
+                    {
+                        Q.add(v);
+                    }
                 }
             }
         }
@@ -302,9 +306,14 @@ public class Network
         
         Path output = new Path();
         
-        while(curr != r)
+        while(curr != r && curr != null)
         {
-            output.add(0, findLink(curr.predecessor, curr));
+            Link ij = findLink(curr.predecessor, curr);
+            
+            if(ij != null)
+            {
+                output.add(0, ij);
+            }
             curr = curr.predecessor;
         }
         
@@ -361,4 +370,79 @@ public class Network
     {
         return (getTSTT() - getSPTT()) / getTotalTrips();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* **********
+    Exercise 8(a)
+    ********** */
+    public double calculateStepsize(int iteration)
+    {
+        return 1.0/iteration;
+    }
+    
+    
+    /* **********
+    Exercise 8(b)
+    ********** */
+    public void calculateNewX(double stepsize)
+    {
+        for(Link l : links)
+        {
+            l.calculateNewX(stepsize);
+        }
+    }
+    
+    
+    /* **********
+    Exercise 8(c)
+    ********** */
+    public void calculateAON()
+    {
+        for(Zone r : zones)
+        {
+            dijkstras(r);
+            
+            for(Zone s : zones)
+            {
+                Path pi_star = trace(r, s);
+                
+                pi_star.addHstar(r.getDemand(s));
+            }
+        }
+    }
+    
+    
+    /* **********
+    Exercise 8(d)
+    ********** */
+    public void msa(int max_iteration)
+    {
+        System.out.println("Iteration\tAEC");
+        
+        
+        for(int iteration = 1; iteration <= max_iteration; iteration++)
+        {
+            calculateAON();
+            
+            double lambda = calculateStepsize(iteration);
+            
+            calculateNewX(lambda);
+            
+            System.out.println(iteration+"\t"+getAEC());
+        }
+    }
+    
+    
+    
+    
+    
+    
 }

@@ -105,4 +105,24 @@ public class Link
     {
         return "("+start.getId()+", "+end.getId()+")";
     }
+    
+    
+    /* **********
+    Exercise 8(a)
+    ********** */
+    private double xstar = 0;
+    
+    public void addXstar(double flow)
+    {
+        xstar += flow;
+    }
+    
+    /* **********
+    Exercise 8(b)
+    ********** */
+    public void calculateNewX(double stepsize)
+    {
+        x = (1 - stepsize) * x + stepsize * xstar;
+        xstar = 0;
+    }
 }

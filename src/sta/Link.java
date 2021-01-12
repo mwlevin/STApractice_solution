@@ -50,4 +50,56 @@ public class Link
         
         return t_ij;
     }
+    
+    
+    
+    
+    /* **********
+    Exercise 2a
+    ********** */
+    public double getCapacity()
+    {
+        return C;
+    }
+    
+    public double getFlow()
+    {
+        return x;
+    }
+    
+    
+    
+    public int hashCode()
+    {
+        return getStart().getId()+getEnd().getId()*10000;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    /* **********
+    Exercise 3a
+    ********** */
+    public Node getStart()
+    {
+        return start;
+    }
+    
+    public Node getEnd()
+    {
+        return end;
+    }
+    
+    
+    /* **********
+    Exercise 3c
+    ********** */
+    public String toString()
+    {
+        return "";
+    }
 }

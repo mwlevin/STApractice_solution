@@ -260,30 +260,43 @@ public class Exercise6
         
         auto.flush("Link.getTravelTime()");
         
-        if(nodes.length > 0)
-        {
-            network.dijkstras(nodes[0]);
         
-            auto.test(nodes[0].predecessor == null);
+        for(Node n : nodes)
+        {
+            n.cost = 1;
+            n.predecessor = n;
+        }
+        
+        if(nodes.length > 20)
+        {
+            network.dijkstras(nodes[20]);
+        
+            auto.test(nodes[20].predecessor == null);
         }
         
         for(int i = 1; i < 24; i++)
         {
             if(i < nodes.length)
             {
-                if(i == 0)
+                if(i == 20)
                 {
                     auto.test(nodes[i].cost == 0);
                 }
                 else
                 {
-                    auto.test(nodes[i].cost > 0);
+                    auto.test(nodes[i].cost > 1);
                 }
             }
             else
             {
                 auto.test(false);
             }
+        }
+        
+        for(Node n : nodes)
+        {
+            n.cost = 1;
+            n.predecessor = n;
         }
 
         if(nodes.length > 10)
@@ -303,7 +316,7 @@ public class Exercise6
                 }
                 else
                 {
-                    auto.test(nodes[i].cost > 0);
+                    auto.test(nodes[i].cost > 1);
                 }
             }
             else
